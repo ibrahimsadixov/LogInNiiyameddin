@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hər şeyi görən göz Niyaməddin</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        background-color: #121212;
+    }
+    main {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+    }
+    input {
+        height: 35px;
+        width: 300px;
+        padding-left: 15px;
+        border-radius: 8px;
+        border: 0;
+    }
+    .container {
+        height: 100%;
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login {
+        height: 400px;
+        width: 80%;
+        background-color: #151515;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+    }
+   
+    .eyes {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .eye {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: #fff;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid white;
+    }
+
+    .eyeBall {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        background-color: black;
+        border-radius: 50%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        transition: .3s;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-left: 5px;
+        padding-top: 5px;
+    
+    }
+
+ 
+    .eyeBallWhite{
+        background-color: #fff;
+        height: 5px;
+        width: 5px;
+        border-radius: 50%;
+    }
+    button{
+        height: 40px;
+        width: 160px;
+        border-radius: 8px;
+        background-color: grey;
+        color: white;
+        border: 0;
+        cursor: pointer;
+    }
+    .form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .blink{
+        height: 0;
+        width: 50px;
+        position: absolute;
+        background-color: rgb(54, 48, 48);
+        z-index: 2;
+        border-radius: 0 0 30% 30%;
+        top: 0;
+        transition: .5s;
+    }
+    .blinkFocused{
+        height: 100%;
+        transition: .5s;
+    }
+</style>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="login">
+                
+                <div class="eyes">
+                    <div class="eye">
+                        <div class="blink"></div>
+                        <div id="eyeBall1" class="eyeBall"> <div class="eyeBallWhite"></div> </div>
+                    </div>
+                    <div class="eye">
+                        <div class="blink"></div>
+                        <div id="eyeBall2" class="eyeBall"> <div class="eyeBallWhite"></div> </div>
+                    </div>
+                </div>
+                <div class="form" >
+                <input id="username" type="text" placeholder="İstifadəçi adı">
+                <input id="password" type="password" placeholder="Şifrə">
+                <button id="logIn">Daxil Ol </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+        const eyeBall1 = document.getElementById("eyeBall1");
+        const eyeBall2 = document.getElementById("eyeBall2");
+        const logIn = document.getElementById("logIn");
+        const blink = document.querySelectorAll(".blink");
+        const eyeBrow = document.querySelectorAll(".eyeBrow");
+
+        username.addEventListener("focus", function () {
+            const textLength = this.value.length;
+            let topValue = 70 + textLength * 1.08;
+            let leftValue = 20 + textLength * 1.2;
+
+            if (leftValue == 50) {
+                textLengthNew = textLength;
+                topValueNew = topValue;
+            }
+
+            if (leftValue > 50) {
+                let topValueNeww = topValueNew - ((textLength - textLengthNew) * 1.08);
+                if (topValueNeww>75) {
+    
+                    eyeBall1.style.left = `${leftValue}%`;
+                eyeBall1.style.top = `${topValueNeww}%`;
+                eyeBall2.style.left = `${leftValue}%`;
+                eyeBall2.style.top = `${topValueNeww}%`;
+                }else{
+                    eyeBall1.style.left = `75.2%`;
+                eyeBall1.style.top = `75.1%`;
+                eyeBall2.style.left = `75.2%`;
+                eyeBall2.style.top = `75.1%`;
+                }
+         
+                
+
+            } else {
+                eyeBall1.style.left = `${leftValue}%`;
+                eyeBall1.style.top = `${topValue}%`;
+                eyeBall2.style.left = `${leftValue}%`;
+                eyeBall2.style.top = `${topValue}%`;
+
+            }
+        });
+        username.addEventListener("blur", function () {
+            eyeBall1.style.left = "50%";
+            eyeBall1.style.top = "50%";
+            eyeBall2.style.left = "50%";
+            eyeBall2.style.top = "50%";
+        });
+
+        username.addEventListener("input", function () {
+
+            const textLength = this.value.length;
+            let topValue = 70 + textLength * 1.011;
+            let leftValue = 20 + textLength * 1.2;
+
+            if (leftValue == 50) {
+                textLengthNew = textLength;
+                topValueNew = topValue;
+                
+            }
+
+            if (leftValue > 50) {
+                let topValueNeww = topValueNew - ((textLength - textLengthNew) * 1.011);
+              
+                if (topValueNeww>75) {
+    
+                    eyeBall1.style.left = `${leftValue}%`;
+                eyeBall1.style.top = `${topValueNeww}%`;
+                eyeBall2.style.left = `${leftValue}%`;
+                eyeBall2.style.top = `${topValueNeww}%`;
+                }else{
+                    eyeBall1.style.left = `75.2%`;
+                eyeBall1.style.top = `75.1%`;
+                eyeBall2.style.left = `75.2%`;
+                eyeBall2.style.top = `75.1%`;
+                }
+         
+                
+
+            } else {
+                eyeBall1.style.left = `${leftValue}%`;
+                eyeBall1.style.top = `${topValue}%`;
+                eyeBall2.style.left = `${leftValue}%`;
+                eyeBall2.style.top = `${topValue}%`;
+
+            }
+
+
+        });
+
+
+
+        
+password.addEventListener("blur",()=>{
+    password.type="password"
+    blink.forEach(element => { 
+    element.classList.remove("blinkFocused");
+  });
+})
+
+password.addEventListener("focus",()=>{
+    password.type="text"
+    blink.forEach(element => { 
+    element.classList.add("blinkFocused");
+  });
+})
+
+
+    </script>
+</body>
+
+</html>
